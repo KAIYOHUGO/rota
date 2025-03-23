@@ -1,0 +1,38 @@
+[package]
+name = "rota"
+version = "0.1.0"
+edition = "2021"
+
+[profile.release]
+strip = true 
+
+[dependencies]
+anyhow = "1.0.91"
+input = "0.9.1"
+libc = "0.2.161"
+log = "0.4.26"
+
+[dependencies.knus]
+version = "3.2.0"
+default-features = false
+features = ["derive"]
+
+[dependencies.env_logger]
+version = "0.11.6"
+default-features = false
+features = ["auto-color"]
+
+[dependencies.futures]
+version = "0.3.31"
+default-features = false
+features = ["std"]
+
+[dependencies.tokio]
+version = "1.41.0"
+features = ["macros", "rt", "net", "sync"]
+
+[dependencies.zbus]
+version = "4.4.0"
+default-features = false
+features = ["tokio"]
+

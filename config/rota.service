@@ -1,0 +1,14 @@
+[Unit]
+Description=Rota
+
+[Service]
+Type=simple
+# environment="RUST_LOG=DEBUG"
+Environment=XDG_RUNTIME_DIR=/run/user/1000
+Environment="WAYLAND_DISPLAY=wayland-1"
+ExecStart=sudo -E /opt/rota/rota /opt/rota/config.kdl
+Restart=always
+
+[Install]
+# WantedBy=graphical.target
+# After=graphical.target
