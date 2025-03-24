@@ -62,3 +62,18 @@ task type list below
 - `rotation {{"enable"/"disable"}}` set should rotation or not (`on-rotate-*`)
 - `rotate-calibration {{"normal"/"rotate90"/"rotate180"/"rotate270"}}` set calibration matrix on touchscreen
 
+## Install
+
+```bash
+cargo install https://github.com/KAIYOHUGO/rota.git
+```
+
+## Usage
+
+```bash
+rota {{path to config file}}
+```
+
+## Example
+
+The example config file and systemd service is in `config/` folder
