@@ -1,6 +1,6 @@
 # ROTA 💫
 
-A simple tablet/laptop mode config tool for Linux, written in rust
+A simple DE agnostic tablet/laptop mode config tool for Linux, written in rust
 
 ## Feature
 
@@ -72,6 +72,63 @@ cargo install https://github.com/KAIYOHUGO/rota.git
 
 ```bash
 rota {{path to config file}}
+```
+
+## Nix
+
+First add rota to flake inputs.
+
+```nix
+inputs = {
+  rota = {
+    url = "github:kaiyohugo/rota";
+    inputs.nixpkgs.follows = "nixpkgs";
+  };
+}
+```
+
+Then add nixosModules to nixosConfigurations
+
+```nix
+outputs =
+  {
+    rota, # add this
+  }@inputs: {
+  # ...
+  
+  nixosConfigurations."your host name" = nixpkgs.lib.nixosSystem rec {
+    system = "your system arch";
+    specialArgs = { inherit inputs outputs merge; };
+    modules = [
+      rota.nixosModules.${system} # add this
+
+      # ...
+    ];
+  };
+};
+```
+
+Finally, add rota with `service.rota`
+
+```nix
+# for cosmic de
+services.rota = {
+  enable = true;
+  debug = false; # optional, default to false
+  packages = with pkgs; [ cosmic-randr ]; # optional, default to []
+  enviroment = { # optional, default to {}
+    XDG_RUNTIME_DIR = "/run/user/1000";
+    WAYLAND_DISPLAY = "wayland-1";
+  };
+  config = ''
+    settings {
+      default-mode "laptop"
+      switch "/dev/input/event3"
+    }
+
+    // ...
+  '';
+};
 ```
 
 ## Example

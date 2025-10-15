@@ -8,7 +8,7 @@ Type=simple
 # Environment="RUST_LOG=DEBUG"
 Environment=XDG_RUNTIME_DIR=/run/user/1000
 Environment=WAYLAND_DISPLAY=wayland-1
-ExecStart=sudo -E /opt/rota/rota /opt/rota/config.kdl
+ExecStart=/opt/rota/rota /opt/rota/config.kdl
 Restart=always
 
 [Install]
