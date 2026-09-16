@@ -18,7 +18,7 @@
         pkgs = import nixpkgs { inherit system; };
         naersk-lib = pkgs.callPackage naersk { };
       in
-      rec {
+      {
         packages.default = naersk-lib.buildPackage {
           src = ./.;
           buildInputs = with pkgs; [
@@ -42,7 +42,9 @@
             ];
             RUST_SRC_PATH = rustPlatform.rustLibSrc;
           };
-        nixosModules = import ./nixos { rota = packages.default; };
       }
-    ));
+    ))
+    // {
+      nixosModules.default = import ./nixos { rota = self.packages.${nixpkgs.hostPlatform}.default; };
+    };
 }
