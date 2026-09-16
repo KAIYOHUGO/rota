@@ -45,6 +45,6 @@
       }
     ))
     // {
-      nixosModules.default = import ./nixos { rota = self.packages.${nixpkgs.hostPlatform}.default; };
+      nixosModules.default = import ./nixos { rota = self.packages.${nixpkgs.stdenv.hostPlatform}.default; };
     };
 }
